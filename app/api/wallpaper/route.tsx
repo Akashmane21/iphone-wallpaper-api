@@ -12,23 +12,21 @@ export async function GET(req: Request) {
   // ---- Guard: only one client for now ----
   if (clientId !== "client_gym_001") {
     return new ImageResponse(
-      (
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            height: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#000",
-            color: "#fff",
-            fontSize: 48,
-          }}
-        >
-          INVALID CLIENT
-        </div>
-      ),
-      { width, height }
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#000",
+          color: "#fff",
+          fontSize: 48,
+        }}
+      >
+        INVALID CLIENT
+      </div>,
+      { width, height },
     );
   }
 
@@ -45,21 +43,20 @@ export async function GET(req: Request) {
   // ---- GYM WALLPAPER ----
   if (isWeekday) {
     return new ImageResponse(
-      (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            gap: "48px",
-            width: "100%",
-            height: "100%",
-            paddingTop: "180px",
-            paddingBottom: "220px",
-            paddingLeft: "90px",
-            paddingRight: "90px",
-            backgroundColor: "#0B0F1A",
-backgroundImage: `
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "48px",
+          width: "100%",
+          height: "100%",
+          paddingTop: "180px",
+          paddingBottom: "220px",
+          paddingLeft: "90px",
+          paddingRight: "90px",
+          backgroundColor: "#0B0F1A",
+          backgroundImage: `
   radial-gradient(
     circle at center,
     rgba(255, 90, 31, 0.18),
@@ -75,100 +72,149 @@ backgroundImage: `
     rgba(0, 0, 0, 0.85),
     rgba(11, 15, 26, 0) 50%
   )
-`,color: "#ffffff",
+`,
+          color: "#ffffff",
+        }}
+      >
+
+        {/* TOP */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: 92,
+            fontWeight: 700,
+            letterSpacing: "-2px",
           }}
         >
-          {/* TOP */}
-          <div
-            style={{
-              display: "flex",
-              fontSize: 92,
-              fontWeight: 700,
-              letterSpacing: "-2px",
-            }}
-          >
-            GO TO THE GYM
-          </div>
-
-         <div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "380px",
-    //height: "280px",
-    borderRadius: "28px",
-    background:
-      "radial-gradient(circle, rgba(255,90,31,0.35), rgba(0,0,0,0) 70%)",
-  }}
->
-  <img
-    src="https://png.pngtree.com/png-vector/20231014/ourmid/pngtree-man-character-training-at-the-gym-vector-illustration-png-image_10160358.png"
-    alt="Gym Illustration"
-    style={{
-      //width: "260px",
-      height: "460px",
-      borderRadius: "20px",
-      display: "flex",
-    }}
-  />
-</div>
-
-          {/* CENTER */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: 38,
-              opacity: 0.75,
-              lineHeight: 1.4,
-              maxWidth: "85%",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              You promised yourself discipline.
-            </div>
-            <div style={{ display: "flex" }}>
-              Comfort is lying to you.
-            </div>
-          </div>
-
-          {/* BOTTOM */}
-          <div
-            style={{
-              display: "flex",
-              fontSize: 28,
-              opacity: 0.5,
-              letterSpacing: "2px",
-            }}
-          >
-            {timeLabel} • DISCIPLINE MODE
-          </div>
+          GO TO THE GYM
         </div>
-      ),
-      { width, height }
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "380px",
+            //height: "280px",
+            borderRadius: "28px",
+            background:
+              "radial-gradient(circle, rgba(255,90,31,0.35), rgba(0,0,0,0) 70%)",
+          }}
+        >
+          <img
+            src="https://png.pngtree.com/png-vector/20231014/ourmid/pngtree-man-character-training-at-the-gym-vector-illustration-png-image_10160358.png"
+            alt="Gym Illustration"
+            style={{
+              //width: "260px",
+              height: "460px",
+              borderRadius: "20px",
+              display: "flex",
+            }}
+          />
+        </div>
+
+        {/* CENTER */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            fontSize: 38,
+            opacity: 0.75,
+            lineHeight: 1.4,
+            maxWidth: "85%",
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            You promised yourself discipline.
+          </div>
+          <div style={{ display: "flex" }}>Comfort is lying to you.</div>
+        </div>
+
+       
+
+        {/* BOTTOM */}
+        <div
+          style={{
+            display: "flex",
+            fontSize: 28,
+            opacity: 0.5,
+            letterSpacing: "2px",
+          }}
+        >
+          {timeLabel} • DISCIPLINE MODE
+        </div>
+
+         {/* Weekday strip */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "25px",
+            alignItems: "center",
+          }}
+        >
+          {["S", "M", "T", "W", "T", "F", "S"].map((label, index) => {
+            const isToday = index === day;
+            const isWeekend = index === 0 || index === 6;
+
+            let dotColor = "rgba(255,255,255,0.4)";
+            if (isWeekend) dotColor = "#48cc69c9";
+            if (isToday) dotColor = "#e57873ff";
+
+            return (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    fontSize: 35,
+                    opacity: 0.85,
+                  }}
+                >
+                  {label}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "28px",
+                    height: "28px",
+                    borderRadius: "14px",
+                    backgroundColor: dotColor,
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>,
+      { width, height },
     );
   }
 
   // ---- FALLBACK WALLPAPER (WEEKEND) ----
   return new ImageResponse(
-    (
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(180deg, #0f2027, #203a43)",
-          color: "#ffffff",
-          fontSize: 44,
-          opacity: 0.85,
-        }}
-      >
-        Focus on what matters
-      </div>
-    ),
-    { width, height }
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(180deg, #0f2027, #203a43)",
+        color: "#ffffff",
+        fontSize: 44,
+        opacity: 0.85,
+      }}
+    >
+      Focus on what matters
+    </div>,
+    { width, height },
   );
 }
