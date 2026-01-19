@@ -101,7 +101,7 @@ export async function GET(req: Request) {
               "radial-gradient(circle, rgba(255,90,31,0.35), rgba(0,0,0,0) 70%)",
           }}
         >
-          <img
+          {/* <img
             src="https://png.pngtree.com/png-vector/20231014/ourmid/pngtree-man-character-training-at-the-gym-vector-illustration-png-image_10160358.png"
             alt="Gym Illustration"
             style={{
@@ -110,7 +110,7 @@ export async function GET(req: Request) {
               borderRadius: "20px",
               display: "flex",
             }}
-          />
+          /> */}
         </div>
 
         {/* CENTER */}
